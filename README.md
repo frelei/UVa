@@ -21,3 +21,6 @@ And
 ### ABOUT
 
 I am an iOS Developer, besides that most of those codes are written in C++, because I want to learn a new language and learning is always cool!!!!
+To check my [status](http://uhunt.felix-halim.net/id/370998) on UVA.
+
+Happy Coding to all!!! :)
