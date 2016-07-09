@@ -1,4 +1,4 @@
-//https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=652&page=show_problem&problem=1071
+// https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=12&page=show_problem&problem=944
 
 #include <iostream>
 #include <cstdio>
@@ -11,57 +11,47 @@
 
 using namespace std;
  
+int values[55][55];
+int val[55];
+
+int cutting(int left, int right)
+{
+    if (left + 1 == right) 
+        return 0;
+
+    int cut = values[left][right];
+    
+    if (cut != -1) 
+        return cut;
+
+     int cost = 100000;
+    for(int i = left + 1; i < right; i++)
+    {
+        cost= min(cost, cutting(left, i) + cutting(i, right) + val[right] - val[left]);
+    }
+    values[left][right] = cost;
+    return cost;
+}
+
+
 int main ()
 {
-    int input;
-    int MAX_OBJECT = 1000;
-    int MAX_WEIGHT = 30;
-
- 	cin >> input;
-    while ( input > 0 ) 
+    while(true)
     {
-        int values [MAX_OBJECT + 1];
-        int weight [MAX_OBJECT + 1];
- 
- 		// Fill array
- 		int objects;
-        cin >> objects;
-        for ( int i = 0; i < objects; i++ )
-        {
-        	cin >> values[i];
-        	cin >> weight[i];
-        }
- 
- 		// Packing
-        int pack [MAX_WEIGHT + 5];
-        for (int i = 0; i < MAX_WEIGHT + 5; i++)
-			pack[i] = 0;
+        int cuts, lenght;
+        cin  >> lenght;
 
-        for ( int j = 0; j < objects; j++ ) 
-        {
-            for ( int i = MAX_WEIGHT; i >= 0; i-- ) 
-            {
-                if ( weight[j] <= i && pack[i] < pack[i - weight[j]] + values[j] )
-                    pack[i] = pack[i - weight[j]] + values[j];
-            }
-        }
- 
- 		// Calc Pirce
-        int group;
- 		cin >> group;
-        int price = 0;
- 
-        while ( group > 0 ) 
-        {
-            int volume;
-            cin >> volume;
-            price += pack[volume];
-            group--;
-        }
+        if (lenght == 0) break;
+        
+        cin >> cuts;
+        memset(values, -1, sizeof(values));
+        val[0] = 0; 
+        val[cuts + 1] = lenght;
 
-	 	input--;
-	 	cout << price << endl;
+        for(int i = 1; i <= cuts; i++)
+            cin >> val[i];
+
+        cout << "The minimum cutting is " << cutting(0, cuts + 1) << endl;
     }
- 
     return 0;
 }

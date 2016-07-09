@@ -1,4 +1,4 @@
-//https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=652&page=show_problem&problem=1071
+// http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=10&page=show_problem&problem=762
 
 #include <iostream>
 #include <cstdio>
