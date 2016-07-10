@@ -13,7 +13,7 @@ using namespace std;
 char validate(char c)
 {
 	char ch = tolower(c);
-	
+
 	if ( (ch >= 'a' && ch <= 'z') || (ch == '-') || (ch == ' ') || (ch == '\n'))
 	{
 		return ch;
@@ -22,7 +22,6 @@ char validate(char c)
 	{
 		return ' ';
 	}
-	
 }
 
 vector<string> split(const string &s, char delim) {
@@ -56,7 +55,7 @@ int main()
 		}
 		else
 		{
-			
+
 			if (temp.size() > 0)
 			{
 				string hyfenWord;
@@ -77,12 +76,12 @@ int main()
 					string s2 = hyfenWord.substr(found2, hyfenWord.size());
 					if (!s1.empty())
 					{
-						s1.erase(remove_if(s1.begin(), s1.end(), ::isspace), s1.end()); 
+						s1.erase(remove_if(s1.begin(), s1.end(), ::isspace), s1.end());
 						dictionary.insert(s1);
 					}
 					if (!s2.empty())
 					{
-						s2.erase(remove_if(s2.begin(), s2.end(), ::isspace), s2.end()); 
+						s2.erase(remove_if(s2.begin(), s2.end(), ::isspace), s2.end());
 						dictionary.insert(s2);
 					}
 				}
@@ -93,7 +92,7 @@ int main()
 						hyfenWord.erase(remove_if(hyfenWord.begin(), hyfenWord.end(), ::isspace), hyfenWord.end());
 						dictionary.insert(hyfenWord);
 					}
-				} 
+				}
 
 				temp.clear();
 			}
@@ -106,7 +105,7 @@ int main()
 					for (int i = 0; i < c.size(); i++)
 					{
 						string k = c[i];
-						k.erase(remove_if(k.begin(), k.end(), ::isspace), k.end()); 
+						k.erase(remove_if(k.begin(), k.end(), ::isspace), k.end());
 						if (!k.empty())
 						{
 							dictionary.insert(k);
@@ -116,10 +115,8 @@ int main()
 				else
 				{
 					word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
-					dictionary.insert(word);			
+					dictionary.insert(word);
 				}
-
-				
 			}
 		}
 	}
@@ -128,6 +125,6 @@ int main()
 	{
 		cout << *it << endl;
 	}
-
+	cout << endl;
 	return 0;
 }

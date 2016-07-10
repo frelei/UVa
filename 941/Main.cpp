@@ -4,10 +4,19 @@
 #include <algorithm>
 #include <vector>
 #include <queue>
-#include <set>
 #include <stack>
+#include <string>
 
 using namespace std;
+
+long long factorial[21];
+void computeFactorial()
+{
+   factorial[0] = 1;
+   for(int i = 1; i < 21; ++i)
+      factorial[i] = factorial[i - 1] * i;
+}
+
 
 void swap(char &x, char &y)
 {
@@ -17,9 +26,7 @@ void swap(char &x, char &y)
     y = temp;
 }
 
-
 vector<string> val;
-
 vector<string> permute(string s, int i, int n)
 {
     int j;
@@ -32,37 +39,41 @@ vector<string> permute(string s, int i, int n)
             swap(s[i],s[j]);
             permute(s, i + 1, n);
             swap(s[i],s[j]);
-        }  
+        }
     }
     return val;
 }
 
-vector<string> permutation(string &s, int size)
+string permutation(string &s, long long index)
 {
-	int k = 0;
-	vector<string> permut;
-	do
-   {
-   	  permut.push_back(s);
-   	  if (k == size) break;
-   	  k++;
-   }while(std::next_permutation(s.begin(),s.end()));
+  string result(s);
 
-   return permut;
+   for(int i = 0; i < s.size(); ++i)
+   {
+      sort(result.begin() + i, result.end());
+      if (index == 0)
+         break;
+      int charPos = i + index / factorial[s.size() - i - 1];
+      swap(result[i], result[charPos]);
+      index = index % factorial[s.size() - i - 1];
+   }
+
+   return result;
 }
 
 int main()
 {
-	int N, index;
+	int N;
+  long long index;
 	string a;
 	cin >> N;
 
+  computeFactorial();
 	for(int i = 0; i < N; i++)
 	{
 		cin >> a >> index;
-		val.clear();
-		vector<string> values = permutation(a, index); //permute(a, 0, a.length() - 1);
-		cout << values[index] << endl;
+		a = permutation(a, index);
+		cout << a << endl;
 	}
 	return 0;
 }
